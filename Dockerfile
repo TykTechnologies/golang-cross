@@ -1,9 +1,9 @@
 # Tested for arm64 osx (sdk ver below) amd64
 ARG GO_VERSION=1.15.15
 
-ARG DEB_VER=stretch
+ARG DEB_VERSION=stretch
 
-FROM golang:${GO_VERSION}-${DEB_VER} AS base
+FROM golang:${GO_VERSION}-${DEB_VERSION} AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 # Install deps
