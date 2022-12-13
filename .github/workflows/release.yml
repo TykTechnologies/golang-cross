@@ -15,9 +15,6 @@ jobs:
       matrix:
         gover: [ 1.15, 1.16, 1.17, 1.18, 1.19 ]
         debver: [ buster ]
-        include:
-          - debver: stretch
-            tagSuffix: -el7
 
     runs-on: ubuntu-latest
  
