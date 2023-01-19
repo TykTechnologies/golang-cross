@@ -14,7 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         gover: [ 1.15, 1.16, 1.17, 1.18, 1.19 ]
-        debver: [ buster ]
+        debver: [ stretch, bullseye ]
+        exclude:
+          - gover: 1.19
+            debver: stretch
 
     runs-on: ubuntu-latest
  
