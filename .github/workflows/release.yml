@@ -18,6 +18,8 @@ jobs:
         exclude:
           - gover: 1.19
             debver: stretch
+          - gover: 1.15
+            debver: bullseye
 
     runs-on: ubuntu-latest
  
