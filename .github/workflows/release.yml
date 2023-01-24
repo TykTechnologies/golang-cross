@@ -13,6 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        gover: []
         debver: [ stretch, buster, bullseye ]
         include:
           - debver: stretch
