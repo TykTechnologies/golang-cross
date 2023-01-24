@@ -13,15 +13,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        gover: []
-        debver: [ stretch, buster, bullseye ]
+        gover: [1.16, 1.17, 1.18]
+        debver: [ buster, bullseye ]
         include:
-          - debver: stretch
-            gover: [ 1.15, 1.16, 1.17, 1.18 ]
-          - debver: buster
-            gover: [ 1.15, 1.16, 1.17, 1.18, 1.19 ]
-          - debver: bullseye
-            gover: [ 1.19 ]
+          - gover: 1.19
+            debver: bullseye
+          - gover: 1.19
+            debver: buster
 
     runs-on: ubuntu-latest
  
