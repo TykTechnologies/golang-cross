@@ -13,6 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        image:
+          - "golang"
         gover:
           - "1.16"
           - "1.17"
@@ -20,16 +22,17 @@ jobs:
           - "1.19"
           - "1.20"
         debver:
-          - buster
-          - bullseye
+          - "-buster"
+          - "-bullseye"
         include:
           - gover: "1.15"
-            debver: stretch
+            debver: "-stretch"
             tag: el7
           - gover: "1.15"
-            debver: buster
-          - gover: "goboring/golang:1.16.7b7"
-            boringcrypto: true
+            debver: "-buster"
+          - image: "goboring/golang"
+            debver: ""
+            gover: "1.16.7b7"
             tag: fips
 
 
