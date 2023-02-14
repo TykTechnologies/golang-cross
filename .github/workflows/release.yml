@@ -28,6 +28,10 @@ jobs:
             tag: el7
           - gover: "1.15"
             debver: buster
+          - gover: "goboring/golang:1.16.7b7"
+            boringcrypto: true
+            tag: fips
+
 
     runs-on: ubuntu-latest
  
