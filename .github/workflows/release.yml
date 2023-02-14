@@ -58,3 +58,4 @@ jobs:
         build-args: |
           GO_VERSION=${{ matrix.gover }}
           DEB_VERSION=${{ matrix.debver }}
+          GO_IMAGE=${{ matrix.image }}
