@@ -3,7 +3,7 @@
 ARG GO_VERSION=1.15.15
 ARG DEB_VERSION=stretch
 
-FROM golang:${GO_VERSION}-${DEB_VERSION} AS base
+FROM goboring/golang:1.16.7b7 AS base
 
 ARG DEB_VERSION
 ARG DEBIAN_FRONTEND=noninteractive
