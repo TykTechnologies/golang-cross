@@ -27,9 +27,11 @@ jobs:
         include:
           - gover: "1.15"
             debver: "-stretch"
+            image: "golang"
             tag: el7
           - gover: "1.15"
             debver: "-buster"
+            image: "golang"
           - image: "goboring/golang"
             debver: ""
             gover: "1.16.7b7"
