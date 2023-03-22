@@ -43,7 +43,6 @@ RUN echo "Starting image build for $(grep PRETTY_NAME /etc/os-release)" \
         rpm                                            \
         ruby-dev
 
-#RUN wget -qO- https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_Linux_x86_64.tar.gz | tar -C /usr/bin/ -xzf - goreleaser
 
 # install docker cli
 RUN wget -qO- https://download.docker.com/linux/debian/gpg | apt-key add - && \
