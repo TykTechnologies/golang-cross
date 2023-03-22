@@ -45,7 +45,7 @@ case $pkg in
     # the signing - there's no need to sign here. The rpm command throws an error if
     # it's already present. We're keeping this step here in case goreleaser/nfpm fails to
     # sign again as before.
-    curl https://keyserver.tyk.io/tyk.io.rpm.signing.key.2020 -o tyk.pub.key && rpm --import tyk.pub.key
+    wget https://keyserver.tyk.io/tyk.io.rpm.signing.key.2020 -o tyk.pub.key && rpm --import tyk.pub.key
     if ! rpm --checksig "$pkg"
     then
         echo "No sign present in rpm package, adding sign.."

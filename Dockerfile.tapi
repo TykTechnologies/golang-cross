@@ -21,7 +21,7 @@ RUN echo "Starting image build for $(grep PRETTY_NAME /etc/os-release)" \
         build-essential                                \
         clang                                          \
         crossbuild-essential-arm64                     \
-        curl                                           \
+        wget                                           \
         gdb                                            \
         git-core                                       \
         libtool                                        \

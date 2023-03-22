@@ -48,6 +48,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: ${{ github.ref_name == 'master' }}
+        pull: true
         tags: tykio/golang-cross:${{ format( '{0}-{1}', matrix.gover, matrix.tag || matrix.debver) }}
         build-args: |
           GO_VERSION=${{ matrix.gover }}
