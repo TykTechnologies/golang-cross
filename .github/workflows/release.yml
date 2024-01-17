@@ -18,9 +18,18 @@ jobs:
         gover:
           - "1.21"
           - "1.19"
+          - "1.16"
         debver:
           - bullseye
           - bookworm 
+        include:
+          - gover: 1.16
+            debver: stretch
+            tag: 1.16-el7
+          - gover: 1.16
+            debver: bullseye
+            tag: 1.16
+
 
     runs-on: ubuntu-latest
  
