@@ -20,7 +20,13 @@ jobs:
           - "1.21"
         debver:
           - bullseye
-          - bookworm 
+          - bookworm
+      include:
+          - gover: "1.16"
+            debver: "bullseye"
+          - gover: "1.16"
+            debver: "stretch"
+            tag: "1.16-el7"          
 
     runs-on: ubuntu-latest
  
