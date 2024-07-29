@@ -27,7 +27,8 @@ jobs:
               tag: "1.16"
             - gover: "1.16"
               debver: "stretch"
-              tag: "1.16-el7"          
+              tag: "1.16-el7"
+              dockerfile: "Dockerfile.el7"
 
     runs-on: ubuntu-latest
  
@@ -47,6 +48,7 @@ jobs:
       with:
         push: ${{ github.ref_name == 'master' }}
         pull: true
+        file: ${{ matrix.dockerfile || Dockerfile }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
         tags: tykio/golang-cross:${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }},tykio/golang-cross:${{ matrix.tag || format( '{0}-{1}-pgo', matrix.gover,  matrix.debver) }}
