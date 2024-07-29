@@ -8,7 +8,7 @@ FROM golang:${GO_VERSION}-${DEB_VERSION} AS base
 ARG DEB_VERSION
 ARG DEBIAN_FRONTEND=noninteractive
 # Install deps
-RUN dpkg --add-architecture arm64                      \
+RUN dpkg                                               \
  && apt-get update                                     \
  && apt-get dist-upgrade -y -q                         \
         autoconf                                       \
