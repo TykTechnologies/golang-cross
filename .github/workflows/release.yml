@@ -42,7 +42,16 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-            
+
+    - name: Setup tmate session only in debug mode
+      uses: mxschmitt/action-tmate@v3
+      if: runner.debug == '1'
+      with:
+        detached: true
+        limit-access-to-actor: true
+        # Only ${{ github.actor }} has access
+        # See https://github.com/mxschmitt/action-tmate#use-registered-public-ssh-keys        
+
     - name: Build and push go ${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }} based image
       uses: docker/build-push-action@v5
       with:

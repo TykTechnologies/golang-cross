@@ -39,8 +39,7 @@ RUN apt-get update                                     \
         libssl-dev                                     \
         unzip                                          \
         sudo                                           \
-        jq                                             \
-        rpm
+        jq                                             
 
 # install docker cli
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
