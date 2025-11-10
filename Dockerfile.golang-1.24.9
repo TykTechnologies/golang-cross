@@ -1,12 +1,33 @@
 # Committs to master will trigger a push to Dockerhub
 
-ARG GO_VERSION=1.19.12
-ARG DEB_VERSION=bullseye
+# Stage 1: Build Go 1.24.9
+FROM buildpack-deps:bullseye-scm AS build-go
 
-FROM golang:${GO_VERSION}-${DEB_VERSION} AS base
+ARG GO_VERSION=1.24.9
+ENV PATH=/usr/local/go/bin:$PATH
 
-ARG DEB_VERSION
-ARG DEBIAN_FRONTEND=noninteractive
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "$arch" in \
+        amd64)  url="https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz"; sha256="5b7899591c2dd6e9da1809fde4a2fad842c45d3f6b9deb235ba82216e31e34a6"; ;; \
+        arm64)  url="https://dl.google.com/go/go${GO_VERSION}.linux-arm64.tar.gz"; sha256="9aa1243d51d41e2f93e895c89c0a2daf7166768c4a4c3ac79db81029d295a540"; ;; \
+        *) echo "unsupported arch: $arch" && exit 1 ;; \
+    esac; \
+    wget -O go.tgz "$url"; \
+    echo "$sha256 *go.tgz" | sha256sum -c -; \
+    tar -C /usr/local -xzf go.tgz; \
+    rm go.tgz
+
+# Stage 2: Main image
+FROM buildpack-deps:bullseye-scm AS base
+
+COPY --from=build-go /usr/local/go /usr/local/go
+ENV PATH=/usr/local/go/bin:$PATH
+ENV GOPATH=/go
+ENV GOTOOLCHAIN=local
+ENV DEBIAN_FRONTEND=noninteractive
+
+
 # Install deps
 RUN dpkg --add-architecture arm64                      \
  && dpkg --add-architecture s390x                      \
