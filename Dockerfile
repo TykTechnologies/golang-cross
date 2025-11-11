@@ -49,9 +49,9 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
     apt-get update && apt-get install -y docker-ce-cli
 
-COPY upgrade-git-on-stretch.sh /
-RUN /upgrade-git-on-stretch.sh ${DEB_VERSION}
-RUN apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+COPY fetch-latest-go.sh /
+RUN DEB_VERSION=${DEB_VERSION} /fetch-latest-go.sh
+RUN apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && rm /fetch-latest-go.sh
 
 # Used only when building locally, else the latest goreleaser is installed by GHA
 RUN curl -fsSL https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_Linux_x86_64.tar.gz  | tar -C /usr/bin/ -xzf - goreleaser
