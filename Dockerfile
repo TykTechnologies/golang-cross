@@ -44,6 +44,9 @@ RUN dpkg --add-architecture arm64                      \
         jq                                             \
         rpm
 
+# Add ARM64 compiler symbolic link for Go cross-compilation
+RUN ln -s /usr/bin/aarch64-linux-gnu-gcc /usr/bin/arm64-linux-gnu-gcc
+
 # install docker cli
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
