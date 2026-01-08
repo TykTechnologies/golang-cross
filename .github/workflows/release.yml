@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         gover:
-          - "1.24"
+          - "1.25"
         debver:
           - bullseye
           - bookworm 
