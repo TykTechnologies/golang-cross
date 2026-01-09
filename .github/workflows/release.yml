@@ -21,7 +21,6 @@ jobs:
         debver:
           - bullseye
           - bookworm
-          - trixie
 
     runs-on: ubuntu-latest
  
