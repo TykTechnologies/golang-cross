@@ -17,9 +17,11 @@ jobs:
       matrix:
         gover:
           - "1.25"
+          - "1.24"
         debver:
           - bullseye
-          - bookworm 
+          - bookworm
+          - trixie
 
     runs-on: ubuntu-latest
  
