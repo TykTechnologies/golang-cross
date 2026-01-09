@@ -6,11 +6,6 @@ GO_VERSION="${GO_VERSION:-1.24}"
 DEB_VERSION="${DEB_VERSION:-bullseye}"
 GOARCH="$(dpkg --print-architecture)"
 
-if [[ "$DEB_VERSION" != "bullseye" ]]; then
-  echo "Nothing to do - will update go only in bullseye"
-  exit 0
-fi
-
 echo "Fetching latest Go ${GO_VERSION}.x version for ${GOARCH}..."
 TMP_DIR="$(mktemp -d)"
 cd "$TMP_DIR"
