@@ -6,6 +6,7 @@ ARG DEB_VERSION=bullseye
 FROM debian:${DEB_VERSION} AS base
 
 ARG DEB_VERSION
+ARG GO_VERSION
 ARG DEBIAN_FRONTEND=noninteractive
 # Install deps
 RUN dpkg --add-architecture arm64                      \
@@ -57,7 +58,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     apt-get update && apt-get install -y docker-ce-cli
 
 COPY fetch-latest-go.sh /
-RUN DEB_VERSION=${DEB_VERSION} /fetch-latest-go.sh
+RUN GO_VERSION=${GO_VERSION} DEB_VERSION=${DEB_VERSION} /fetch-latest-go.sh
 
 # Setup go specific env vars
 # setting to local to avoid unexpected toolchain upgrades during build, and
