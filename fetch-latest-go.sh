@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
-#set -x
+# set -x
 
 GO_VERSION="${GO_VERSION:-1.24}"
-DEB_VERSION="${DEB_VERSION:-bullseye}"
 GOARCH="$(dpkg --print-architecture)"
 
 echo "Fetching latest Go ${GO_VERSION}.x version for ${GOARCH}..."
@@ -18,8 +17,9 @@ LATEST=$(echo "$JSON" | jq -r --arg ver "go${GO_VERSION}." '
   map(select(.version | startswith($ver))) | first | .version
 ')
 
-if [ -z "$LATEST" ]; then
-  echo "Could not find latest Go version for $GO_VERSION"
+if [[ -z "$LATEST"  ||  "$LATEST" = "null" ]]; then
+  echo "Could not find latest Go patch version for $GO_VERSION"
+  echo "Check EOL for minor version: $GO_VERSION"
   exit 1
 fi
 
