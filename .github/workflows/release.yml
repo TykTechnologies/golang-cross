@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '30 23 * * 7,2,4'   # Run 30 mins before midnight on Sun, Tues, Thurs
+    - cron: '30 23 * * 0,2,4'   # Run 30 mins before midnight on Sun, Tues, Thurs
   pull_request:
   workflow_dispatch:
 
