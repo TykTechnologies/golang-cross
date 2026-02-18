@@ -17,7 +17,7 @@ jobs:
       matrix:
         gover:
           - "1.25"
-          - "1.24"
+          - "1.26"
         debver:
           - bullseye
           - bookworm
