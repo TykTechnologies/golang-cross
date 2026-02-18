@@ -58,7 +58,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     apt-get update && apt-get install -y docker-ce-cli
 
 COPY fetch-latest-go.sh /
-RUN GO_VERSION=${GO_VERSION} DEB_VERSION=${DEB_VERSION} /fetch-latest-go.sh
+RUN GO_VERSION=${GO_VERSION} /fetch-latest-go.sh
 
 # Setup go specific env vars
 # setting to local to avoid unexpected toolchain upgrades during build, and

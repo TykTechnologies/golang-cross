@@ -5,44 +5,44 @@ on:
     branches:
       - master
   schedule:
-    - cron: '0 0 * * 1' # Run every Monday at 12:00 AM UTC
+    - cron: '30 23 * * 0,2,4'   # Run 30 mins before midnight on Sun, Tues, Thurs
   pull_request:
   workflow_dispatch:
 
 jobs:
   build:
-    name: go ${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }} 
+    name: go ${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }}
     strategy:
       fail-fast: false
       matrix:
         gover:
           - "1.25"
-          - "1.24"
+          - "1.26"
         debver:
           - bullseye
           - bookworm
 
     runs-on: ubuntu-latest
- 
-    steps:
-    - uses: actions/checkout@v4
 
-    - uses: docker/setup-buildx-action@v3
-    
-    - name: Login to DockerHub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-            
-    - name: Build and push go ${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }} based image
-      uses: docker/build-push-action@v5
-      with:
-        push: ${{ github.ref_name == 'master' }}
-        pull: true
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-        tags: tykio/golang-cross:${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }},tykio/golang-cross:${{ matrix.tag || format( '{0}-{1}-pgo', matrix.gover,  matrix.debver) }}
-        build-args: |
-          GO_VERSION=${{ matrix.gover }}
-          DEB_VERSION=${{ matrix.debver }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push go ${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }} based image
+        uses: docker/build-push-action@v5
+        with:
+          push: ${{ github.ref_name == 'master' }}
+          pull: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: tykio/golang-cross:${{ matrix.tag || format( '{0}-{1}', matrix.gover,  matrix.debver) }},tykio/golang-cross:${{ matrix.tag || format( '{0}-{1}-pgo', matrix.gover,  matrix.debver) }}
+          build-args: |
+            GO_VERSION=${{ matrix.gover }}
+            DEB_VERSION=${{ matrix.debver }}
